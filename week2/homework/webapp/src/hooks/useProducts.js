@@ -28,6 +28,15 @@ const productsData = [
     price: "50",
     currency: "DKK",
   },
+  {
+    id: 4,
+    name: "Juice Box",
+    imageURL:
+      "https://www.kirbysproduce.com/wp-content/uploads/2020/04/produce-box.jpg",
+    description: "Great box for your juicer",
+    price: "50",
+    currency: "DKK",
+  },
 ];
 
 let initialProducts = productsData.map((item) => {
@@ -44,11 +53,14 @@ function useProducts() {
   };
 
   const removeProduct = (product) => {
-    setCart(cart.filter((item) => item.id != product.id));
+    setCart(cart.filter((item) => item.id !== product.id));
   };
 
   const calculateSum = (cart) => {
-    return '?';
+    const totalAmount = cart.reduce((acc, item) => {
+      return (acc += parseInt(item.price));
+    }, 0);
+    return totalAmount;
   };
 
   return { products, cart, addProduct, removeProduct, calculateSum };
